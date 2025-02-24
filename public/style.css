@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.navbar {
+    background-color: #ff0000;
+    color: white;
+}
+.navbar a {
+    color: white;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 10px 0;
+}
+.sidebar a:hover {
+    background-color: #ddd;
+}
+.social-icons {
+    position: fixed;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.social-icons a {
+    display: block;
+    margin: 10px 0;
+}
+.main-content {
+    padding: 20px;
+}
+.main-content img {
+    width: 100%;
+}
+.product-list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.product-list div {
+    flex: 1;
+    margin: 0 10px;
+}
+.product-list div img {
+    width: 100%;
+}
+    .brand-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 10px !important;
+        background-color: #fff;
+        border-radius: 50%;
+        margin: auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .brand-section {
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .footer {
+        background-color: #ff0000;
+    }
+
+    .navbar .navbar-brand img {
+        max-width: 150px;
+        height: auto;
+    }
+
+    .nav-link {
+        color: #555 !important;
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
+    .nav-link:hover {
+        background-color: #f8f9fa;
+    }
+    .hover-sidebar:hover {
+        background-color: #f8f9fa;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .sidebar {
+        height: 100%;
+        position: sticky;
+        top: 0;
+    }
+    
