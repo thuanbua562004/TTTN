@@ -1,6 +1,6 @@
 import axios from "axios";
 const api = axios.create({
-  baseURL: "http://localhost:3000", // Đổi theo backend của bạn
+  baseURL: "https://tttnserver.onrender.com", // Đổi theo backend của bạn
   headers: { "Content-Type": "application/json" },
 });
 
