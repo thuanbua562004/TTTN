@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCart, fetchUserById } from '../Redux/counterSlice';
 import Loading from './Loading';
 import axios from '../AxiosConfig/config';
-import { useLocation, useNavigate } from "react-router-dom";
+import {Link, useLocation, useNavigate } from "react-router-dom";
 
 function Pay() {
 

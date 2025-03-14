@@ -2,6 +2,7 @@ import React, { useEffect, useState } from'react';
 import Product from './Product';
 import axios  from '../AxiosConfig/config';
 import NewRow from "./NewRow"
+import { Link } from 'react-router-dom';
 const Home = () => {
   const [category, setCategory] = useState(null)
   const fetchCate = async () => {

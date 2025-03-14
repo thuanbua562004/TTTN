@@ -3,7 +3,7 @@ import axios from '../AxiosConfig/config';
 import { ToastContainer, toast } from 'react-toastify';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 const ModalLogin = () => {
   const [isLogin, setIsLogin] = useState(true);

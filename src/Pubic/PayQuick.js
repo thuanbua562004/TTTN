@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import Address from './GetAdress';
 import axios from '../AxiosConfig/config';
 import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function Pay() {
   const navigate = useNavigate();
