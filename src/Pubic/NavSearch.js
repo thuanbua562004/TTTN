@@ -1,93 +1,105 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Search } from "lucide-react"; // Icon tìm kiếm
-
-const products = [
-  { name: "iPhone 15", image: "https://via.placeholder.com/100" },
-  { name: "Samsung Galaxy S23", image: "https://via.placeholder.com/100" },
-  { name: "MacBook Air M2", image: "https://via.placeholder.com/100" },
-  { name: "Dell XPS 13", image: "https://via.placeholder.com/100" },
-  { name: "Apple Watch Series 9", image: "https://via.placeholder.com/100" },
-  { name: "Sony WH-1000XM5", image: "https://via.placeholder.com/100" },
-  { name: "iPad Pro M2", image: "https://via.placeholder.com/100" },
-];
+import { Search } from "lucide-react";
+import axios from "../AxiosConfig/config";
+import { Link } from "react-router-dom";
+import Fuse from "fuse.js";
+import removeAccents from "remove-accents";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [fuse, setFuse] = useState(null);
 
+  // Gọi API lấy danh sách sản phẩm
   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const result = await axios.get("/phone/phone");
+        if (result.status === 200 && Array.isArray(result.data)) {
+          setProducts(result.data);
+          setFilteredProducts(result.data);
+
+          // Cấu hình Fuse.js để tìm kiếm hiệu quả
+          const fuseInstance = new Fuse(result.data, {
+            keys: ["name"],
+            threshold: 0.3, // Độ chính xác (càng thấp càng khớp chặt)
+            includeScore: true,
+            ignoreLocation: true,
+            findAllMatches: true,
+          });
+          setFuse(fuseInstance);
+        }
+      } catch (error) {
+        console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
+      }
+    };
+
+    fetchProducts();
+
+    // Lắng nghe sự thay đổi kích thước màn hình
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleSearch = (e) => {
-    const value = e.target.value;
-    setQuery(value);
-    setFilteredProducts(
-      value === ""
-        ? products
-        : products.filter((item) =>
-            item.name.toLowerCase().includes(value.toLowerCase())
-          )
-    );
-  };
+  // Xử lý tìm kiếm với debounce
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (!query.trim()) {
+        setFilteredProducts(products);
+      } else if (fuse) {
+        const searchResults = fuse.search(removeAccents(query)).map((res) => res.item);
+        setFilteredProducts(searchResults);
+      }
+    }, 300); // Debounce 300ms
+
+    return () => clearTimeout(timeout);
+  }, [query, fuse, products]);
 
   return (
     <div className="col-12 col-md-8 col-lg-6 position-relative">
       <div className="input-group shadow-sm rounded">
-        {isMobile && !showSearch ? (
-          // 🌟 Chế độ Mobile: Hiển thị nút tìm kiếm
-          <button
-            className="btn btn-outline-secondary"
-            onClick={() => setShowSearch(true)}
-          >
+        {isMobile && !showDropdown ? (
+          <button className="btn btn-outline-secondary" onClick={() => setShowDropdown(true)}>
             <Search size={20} />
           </button>
         ) : (
-          // 🌟 Chế độ Desktop + Khi nhấn vào nút trên Mobile
           <input
-            style={{ height: "31px", width: isMobile ? "100%" : "400px" }}
             className="form-control me-2 flex-grow-1"
             type="search"
-            placeholder="Tìm kiếm sản phẩm ?"
+            placeholder="Tìm kiếm sản phẩm..."
             value={query}
-            onChange={handleSearch}
+            onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setShowDropdown(true)}
             onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
-            autoFocus={isMobile} // Khi mở input trên mobile, tự động focus
+            autoFocus={isMobile}
+            style={{ height: "38px", width: isMobile ? "100%" : "400px" }}
           />
         )}
       </div>
 
       {showDropdown && (
-        <ul
-          className="list-group mt-2 shadow-sm rounded position-absolute w-100 bg-white"
-          style={{ zIndex: 1000 }}
-        >
+        <ul className="list-group mt-2 shadow-sm rounded position-absolute w-100 bg-white" style={{ zIndex: 1000 }}>
           {filteredProducts.length > 0 ? (
-            filteredProducts.map((product, index) => (
-              <li
-                key={index}
-                className="list-group-item d-flex align-items-center border-0"
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="me-3 rounded"
-                  style={{ width: "60px", height: "60px" }}
-                />
-                <span className="fw-bold">{product.name}</span>
-              </li>
+            filteredProducts.slice(0, 5).map((product, index) => (
+              <Link key={index} to={`/product/${product._id}`} className="text-decoration-none">
+                <li className="list-group-item d-flex align-items-center border-0">
+                  <img
+                    src={product.image?.[0]?.imageUrl || "https://via.placeholder.com/100"}
+                    alt={product.name}
+                    className="me-3 rounded"
+                    style={{ width: "60px", height: "60px" }}
+                  />
+                  <span className="fw-bold text-dark">{product.name}</span>
+                </li>
+              </Link>
             ))
           ) : (
-            <li className="list-group-item text-muted">
-              Không có sản phẩm nào
-            </li>
+            <li className="list-group-item text-muted">Không có sản phẩm nào</li>
           )}
         </ul>
       )}

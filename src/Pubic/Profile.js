@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { jwtDecode } from "jwt-decode";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserById } from '../Redux/counterSlice';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 function Profile() {
@@ -32,6 +32,8 @@ function Profile() {
                     await dispatch(fetchUserById(decoded.email));
                 }
             } catch (error) {
+                localStorage.removeItem("id");
+                localStorage.removeItem("token");
                 console.error("Error fetching user:", error);
             }
         };
@@ -42,6 +44,7 @@ function Profile() {
     // Handle Logout
     const handleLogout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("id");
         navigate(0);
     };
     if (!stageProfile) {
@@ -101,9 +104,9 @@ function Profile() {
                         <div className="card-body text-center p-4">
                             <div className="d-flex justify-content-between align-items-center">
                                 <h3 className="fw-bold text-primary">Hồ Sơ</h3>
-                                <a href="/profile-update" className="btn btn-outline-primary btn-sm">
+                                <Link to={"/profileupdate"} className="btn btn-outline-primary btn-sm">
                                     <i className="bi bi-pencil-square"></i> Chỉnh sửa
-                                </a>
+                                </Link>
                             </div>
 
                             {/* Profile Picture */}
@@ -120,21 +123,21 @@ function Profile() {
                             <ul className="list-group list-group-flush mt-3">
                                 <li className="list-group-item">
                                     <i className="bi bi-calendar-event me-2 text-danger"></i>
-                                    {stageProfile?.dateBirth || "Ngày sinh"}
+                                    Ngày sinh : {stageProfile?.date || "Ngày sinh"}
                                 </li>
                                 <li className="list-group-item">
                                     <i className="bi bi-geo-alt me-2 text-success"></i>
-                                    {stageProfile?.address || "Địa chỉ"}
+                                   Địa chỉ:  {stageProfile?.address || "Địa chỉ"}
                                 </li>
                                 <li className="list-group-item">
                                     <i className="bi bi-envelope-at me-2 text-primary"></i>
                                     <a href={`mailto:${stageProfile?.email || 'example@mail.com'}`} className="text-decoration-none">
-                                        {stageProfile?.email || "Email"}
+                                      Gmail:   {stageProfile?.email || "Email"}
                                     </a>
                                 </li>
                                 <li className="list-group-item">
                                     <i className="bi bi-telephone me-2 text-info"></i>
-                                    {stageProfile?.phoneNumber || "Số điện thoại"}
+                                    Phone: {stageProfile?.phone || "Số điện thoại"}
                                 </li>
                             </ul>
 

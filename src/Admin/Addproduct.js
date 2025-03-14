@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "../AxiosConfig/config";
 import { ToastContainer, toast } from 'react-toastify';
-
+import UploadImg from "./UploadImg"
 function AddProduct() {
+  const [listImg, setListImg] = useState(null)
   const [name, setName] = useState("");
   const [info, setInfo] = useState("");
   const [category, setCategory] = useState([]);
@@ -17,7 +18,7 @@ function AddProduct() {
   const [Camera2, setCamera2] = useState("");
   const [Jack, setJack] = useState("");
   const [Battery, setBattery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Xiaomi");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [file, setFile] = useState("");
   const [variant, setVariant] = useState([
     {
@@ -110,6 +111,10 @@ function AddProduct() {
     fetchingCategory()
   }, [])
   console.log(variant);
+  const resphonImg = async (data) => {
+    console.log(data);
+    setListImg(data)
+  }
   const handleImg = async (src, id) => {
     try {
       const formData = new FormData();
@@ -156,7 +161,8 @@ function AddProduct() {
               };
             })
           };
-        })
+        }),
+        listImages: listImg
       };
 
       const result = await axios.post("/phone/phone", { data });
@@ -201,11 +207,11 @@ function AddProduct() {
     try {
       const responsive = await axios.get('/category/category');
       setCategory(responsive.data);
-      console.log(responsive.data);
     } catch (error) {
       console.error('Error fetching category:', error);
     }
   }
+  console.log(selectedCategory);
 
   return (
     <>
@@ -238,6 +244,7 @@ function AddProduct() {
                 placeholder="Nhập mô tả sản phẩm"
               ></textarea>
             </div>
+            <UploadImg resphoneImg={resphonImg} />
           </div>
           <div className="container mt-5">
             <div className="card shadow-lg p-4">
@@ -350,20 +357,25 @@ function AddProduct() {
             </div>
           </div>
 
-
           <div className="form-group mb-4">
             <label htmlFor="categorySelect" className="form-label fw-bold">
               Chọn danh mục
             </label>
-            <select id="categorySelect" name="Category" className="form-select">
+            <select
+              id="categorySelect"
+              name="Category"
+              className="form-select"
+              onChange={(e) => setSelectedCategory(e.target.value)} // Đặt onChange trên <select>
+              value={selectedCategory} // Ràng buộc giá trị được chọn
+            >
               {category.map((items) => (
-                <option key={items.id} onChange={(e) => { setSelectedCategory(e.target.value) }} value={items.name}> {/* Dùng items.name làm giá trị */}
+                <option key={items.id} value={items.name}>
                   {items.name}
                 </option>
               ))}
-
             </select>
           </div>
+
           {/* Cột phải */}
           <div className="col-md-12">
             <h3 className="mb-4">Biến thể</h3>

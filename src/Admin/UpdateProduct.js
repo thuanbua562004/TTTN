@@ -7,19 +7,19 @@ function AddProduct() {
   const [cate, setlistcate] = useState([])
   const [name, setName] = useState("");
   const [info, setInfo] = useState("");
-    const [category, setCategory] = useState([]);
-    const [Sim, setSim] = useState("");
-    const [Design, setDesign] = useState("");
-    const [Screen, setScreen] = useState("");
-    const [Pixel, setPixel] = useState("");
-    const [Cpu, setCpu] = useState("");
-    const [Ram, setRam] = useState("");
-    const [Rom, setRom] = useState("");
-    const [Camera1, setCamera1] = useState("");
-    const [Camera2, setCamera2] = useState("");
-    const [Jack, setJack] = useState("");
-    const [Battery, setBattery] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("");
+  const [category, setCategory] = useState([]);
+  const [Sim, setSim] = useState("");
+  const [Design, setDesign] = useState("");
+  const [Screen, setScreen] = useState("");
+  const [Pixel, setPixel] = useState("");
+  const [Cpu, setCpu] = useState("");
+  const [Ram, setRam] = useState("");
+  const [Rom, setRom] = useState("");
+  const [Camera1, setCamera1] = useState("");
+  const [Camera2, setCamera2] = useState("");
+  const [Jack, setJack] = useState("");
+  const [Battery, setBattery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [file, setFile] = useState("");
   const [variant, setVariant] = useState([
     {
@@ -42,7 +42,7 @@ function AddProduct() {
       setName(result.data.name)
       setInfo(result.data.info)
       setFile(result.data.image)
-      setCategory(result.data.category)
+      setSelectedCategory(result.data.category)
 
       setSim(result.data.Sim)
       setDesign(result.data.Design)
@@ -77,7 +77,6 @@ function AddProduct() {
       console.error('Error fetching category:', error);
     }
   }
-  console.log(variant)
   useEffect(() => {
     const fetchData = async () => {
       await fetchingCategory(); // Sau đó mới gọi fetchingCategory
@@ -85,7 +84,6 @@ function AddProduct() {
     };
     fetchData();
   }, [])
-  console.log(selectedCategory)
   // Thêm một biến thể mới
   const addVariant = () => {
     setVariant([
@@ -121,12 +119,12 @@ function AddProduct() {
       )
     );
   };
-  const removeMemory = (id,indexd) => {
-    setVariant(variant.map((item) =>item.id==id?
-      {...item, memory: item.memory.filter((items,index) =>index!==indexd)} 
+  const removeMemory = (id, indexd) => {
+    setVariant(variant.map((item) => item.id == id ?
+      { ...item, memory: item.memory.filter((items, index) => index !== indexd) }
       : item
-  
-  ))
+
+    ))
 
   }
   // Cập nhật giá trị của biến thể (màu sắc, ảnh)
@@ -279,126 +277,132 @@ function AddProduct() {
               ></textarea>
             </div>
             <div className="container mt-5">
-            <div className="card shadow-lg p-4">
-              <div className="row">
-                <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">Thẻ SIM:</label>
+              <div className="card shadow-lg p-4">
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">Thẻ SIM:</label>
+                    <input
+                      value={Sim}
+                      type="text"
+                      className="form-control"
+                      placeholder="2 SIM, 5G"
+                    />
+                  </div>
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">Kiểu thiết kế:</label>
+                    <input
+                      value={Design}
+                      type="text"
+                      className="form-control"
+                      placeholder="Thanh cảm ứng"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">Màn hình:</label>
+                    <input
+                      value={Screen}
+                      type="text"
+                      className="form-control"
+                      placeholder="6.78 inch, LTPO AMOLED, 144Hz"
+                    />
+                  </div>
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">Độ phân giải:</label>
+                    <input
+                      value={Pixel}
+                      type="text"
+                      className="form-control"
+                      placeholder="1260 x 2800 pixels, 20:9"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">CPU:</label>
+                    <input
+                      value={Cpu}
+                      type="text"
+                      className="form-control"
+                      placeholder="Snapdragon 8 Gen 3"
+                    />
+                  </div>
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">RAM:</label>
+                    <input
+                      value={Ram}
+                      type="text"
+                      className="form-control"
+                      placeholder="12GB/16GB"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">Bộ nhớ:</label>
+                    <input
+                      value={Rom}
+                      type="text"
+                      className="form-control"
+                      placeholder="256GB/512GB/1TB"
+                    />
+                  </div>
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">Camera sau:</label>
+                    <input
+                      value={Camera1}
+                      type="text"
+                      className="form-control"
+                      placeholder="50 MP + 8 MP"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">Camera trước:</label>
+                    <input value={Camera2} type="text" className="form-control" placeholder="16 MP" />
+                  </div>
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">Jack 3.5mm / Loa:</label>
+                    <input
+                      value={Jack}
+                      type="text"
+                      className="form-control"
+                      placeholder="Không / Loa kép"
+                    />
+                  </div>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label fw-bold">Pin:</label>
                   <input
-                    value={Sim}
+                    value={Battery}
                     type="text"
                     className="form-control"
-                    placeholder="2 SIM, 5G"
+                    placeholder="6100 mAh, 120W"
                   />
                 </div>
-                <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">Kiểu thiết kế:</label>
-                  <input
-                  value={Design}
-                    type="text"
-                    className="form-control"
-                    placeholder="Thanh cảm ứng"
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">Màn hình:</label>
-                  <input
-                    value={Screen}
-                    type="text"
-                    className="form-control"
-                    placeholder="6.78 inch, LTPO AMOLED, 144Hz"
-                  />
-                </div>
-                <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">Độ phân giải:</label>
-                  <input
-                  value={Pixel}
-                    type="text"
-                    className="form-control"
-                    placeholder="1260 x 2800 pixels, 20:9"
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">CPU:</label>
-                  <input
-                    value={Cpu}
-                    type="text"
-                    className="form-control"
-                    placeholder="Snapdragon 8 Gen 3"
-                  />
-                </div>
-                <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">RAM:</label>
-                  <input
-                  value={Ram}
-                    type="text"
-                    className="form-control"
-                    placeholder="12GB/16GB"
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">Bộ nhớ:</label>
-                  <input
-                  value={Rom}
-                    type="text"
-                    className="form-control"
-                    placeholder="256GB/512GB/1TB"
-                  />
-                </div>
-                <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">Camera sau:</label>
-                  <input
-                  value={Camera1}
-                    type="text"
-                    className="form-control"
-                    placeholder="50 MP + 8 MP"
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">Camera trước:</label>
-                  <input value={Camera2} type="text" className="form-control" placeholder="16 MP" />
-                </div>
-                <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">Jack 3.5mm / Loa:</label>
-                  <input
-                  value={Jack}
-                    type="text"
-                    className="form-control"
-                    placeholder="Không / Loa kép"
-                  />
-                </div>
-              </div>
-              <div className="mb-3">
-                <label className="form-label fw-bold">Pin:</label>
-                <input
-                value={Battery}
-                  type="text"
-                  className="form-control"
-                  placeholder="6100 mAh, 120W"
-                />
               </div>
             </div>
-          </div>
           </div>
           <div className="form-group mb-4">
             <label htmlFor="categorySelect" className="form-label fw-bold">
               Chọn danh mục
             </label>
-            <select  onChange={(e)=>setSelectedCategory(e.target.value)} id="categorySelect" name="Category" className="form-select">
+            <select
+              id="categorySelect"
+              name="Category"
+              className="form-select"
+              onChange={(e) => setSelectedCategory(e.target.value)} // Đặt onChange trên <select>
+              value={selectedCategory} // Giữ trạng thái danh mục đã chọn
+            >
               {cate.map((items) => (
                 <option key={items.id} value={items.name}>
                   {items.name}
                 </option>
               ))}
-
             </select>
+
           </div>
 
 

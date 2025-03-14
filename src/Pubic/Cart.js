@@ -14,16 +14,16 @@ function Cart() {
   const id = localStorage.getItem('id');
 
   useEffect(() => {
+    console.log("useEffect chạy lại");
+
     if (id) {
       dispatch(fetchCart(id)).then((res) => {
         if (res.meta.requestStatus === "fulfilled") {
-        } else {
-          toast.error("Sản phẩm đã có trong giỏ");
         }
       });
     }
   }, [dispatch, id]);
-  console.log(data.cart);
+  console.log(data);
 
   if (data.stageLoad == "loading") {
     return (<SkeletonCart />)
@@ -109,9 +109,9 @@ function Cart() {
               currency: "VND",
             })}
           </h5>
-          <Link to="/pay">
+          <a href={'/pay'}>
             <button className="btn btn-danger w-100 mt-2">Thanh Toán</button>
-          </Link>
+          </a>
         </div>
 
         {/* Modal Xóa Sản Phẩm */}

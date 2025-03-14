@@ -25,7 +25,6 @@ const ModalLogin = () => {
         name: user.name,
         avatar: user.picture
       })
-      console.log(result);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -143,12 +142,15 @@ const ModalLogin = () => {
                     style={{ backgroundColor: "#ff0000" }}>
                     Đăng nhập
                   </button>
+                  <a className='mt-5 text-danger' href='/sendCode'>Bạn quên mật khẩu?</a>
+                  <br/>
+                  <a className='mt-5 text-danger' href='/history'>Xem lịch sử đơn?</a>
+
                   <hr className="my-4" /><GoogleLogin
                     onSuccess={response => {
                       const credential = response.credential;
                       localStorage.setItem('token', credential)
-                      const userInfo = jwtDecode(credential); // Giải mã JWT để lấy thông tin
-                      console.log("Thông tin tài khoản:", userInfo);
+                      const userInfo = jwtDecode(credential); 
                       loginGG(userInfo)
                     }}
                     onError={() => {

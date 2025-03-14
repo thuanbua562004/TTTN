@@ -1,37 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../AxiosConfig/config';
 
 const AdminOrderHistory = () => {
   const [history, setHistory] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null); // Dữ liệu đơn hàng được chọn
   const [newStatus, setNewStatus] = useState(''); // Trạng thái cập nhật
-
+  console.log(newStatus)
   // Fetch danh sách đơn hàng
   const getHistory = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/buy');
+      const response = await axios.get('/history/history');
       setHistory(response.data);
       console.log('History fetched successfully:', response.data);
     } catch (error) {
       console.error('Error fetching history:', error);
     }
   };
-
-  // Cập nhật trạng thái đơn hàng
-  const updateOrderStatus = async () => {
+  const saveStatus = async () => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/buy/`, {
-        status: newStatus,
-        _id: selectedOrder._id,
-      });
-      console.log(res);
 
-      getHistory();
+      const response1 = await axios.post('/reset/update-order-status',{
+        id:selectedOrder._id ,
+        status: newStatus,
+        email :"vanthuan562004@gmail.com"
+      });
+      getHistory()
     } catch (error) {
-      console.error('Error updating order status:', error);
-      alert('Cập nhật trạng thái thất bại.');
+      console.error('Error fetching history:', error);
     }
-  };
+  }
+
+
 
   useEffect(() => {
     getHistory();
@@ -70,10 +69,10 @@ const AdminOrderHistory = () => {
                 style={{ cursor: 'pointer' }}
               >
                 <td>{index + 1}</td>
-                <td>{order.id}</td>
+                <td>{order._id}</td>
                 <td>{order.nameCustomer}</td>
                 <td>{order.adress}</td>
-                <td>{order.totalPrice.toLocaleString()} đ</td>
+                <td>{order?.totalPrice?.toLocaleString()} đ</td>
                 <td>
                   <span
                     className={`badge ${order.stage === 'Xử Lý'
@@ -119,7 +118,7 @@ const AdminOrderHistory = () => {
               {selectedOrder ? (
                 <>
                   <p>
-                    <strong>Mã đơn hàng:</strong> {selectedOrder.id}
+                    <strong>Mã đơn hàng:</strong> {selectedOrder._id}
                   </p>
                   <p>
                     <strong>Tên khách hàng:</strong> {selectedOrder.nameCustomer}
@@ -140,7 +139,9 @@ const AdminOrderHistory = () => {
                   <p>
                     <strong>Số điện thoại:</strong> {selectedOrder.phone}
                   </p>
-
+                  <p>
+                    <strong>Note:</strong> {selectedOrder.note}
+                  </p>
                   {/* Danh sách sản phẩm */}
                   <h6>Danh sách sản phẩm:</h6>
                   <ul>
@@ -157,7 +158,7 @@ const AdminOrderHistory = () => {
                         </span>
                         <br />
                         <span>
-                          <strong>Kích thước:</strong> {product.size || 'Không xác định'}
+                          <strong>Bộ nhớ:</strong> {product.memory || 'Không xác định'}
                         </span>
                         <br />
                         <span>
@@ -178,8 +179,9 @@ const AdminOrderHistory = () => {
                       className="form-select"
                       value={newStatus}
                       onChange={(e) => setNewStatus(e.target.value)}
+                      disabled={selectedOrder && selectedOrder.stage === 'Hủy'}
                     >
-                      <option value="Đơn Mới">Đơn Mới</option>
+                      <option value="Đơn mới">Đơn mới</option>
                       <option value="Xử Lý">Xử Lý</option>
                       <option value="Hủy">Hủy</option>
                     </select>
@@ -194,7 +196,7 @@ const AdminOrderHistory = () => {
                 type="button"
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
-                onClick={updateOrderStatus}
+                onClick={saveStatus}
               >
                 Lưu thay đổi
               </button>

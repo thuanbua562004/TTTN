@@ -7,7 +7,7 @@ function KommunicateChat() {
     if (scriptAdded.current) return;
 
     const kommunicateSettings = {
-      appId: "3664ae503516491589997782c768a2681", 
+      appId: "89e3ee364096a28608c60eea96761c22", 
       automaticChatOpenOnNavigation: true,
       popupWidget: true,
     };

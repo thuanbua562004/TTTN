@@ -1,12 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../AxiosConfig/config';
 
+const handleUnauthorizedError = (error) => {
+  if (error.response?.status === 401 ||error.response?.status === 403) {
+    localStorage.removeItem("id");
+    localStorage.removeItem("token");
+  }
+  throw error;
+};
 // Lấy thông tin user bằng email
 export const fetchUserById = createAsyncThunk(
   'fetchUserById',
-  async (email) => {
-    const response = await axios.get(`/user/user/${email}`);
-    return response.data;
+  async (email, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/user/user/${email}`);
+      return response.data;
+    } catch (error) {
+      handleUnauthorizedError(error);
+      return rejectWithValue(error.response?.data || "Error fetching user");
+    }
   }
 );
 
@@ -23,7 +35,9 @@ export const addProductToCart = createAsyncThunk(
 export const fetchCart = createAsyncThunk(
   'fetchCart',
   async (id) => {
+    console.log(id);
     const response = await axios.get(`/cart/cart/${id}`);
+    console.log(response)
     return response.data;
   }
 );
@@ -76,6 +90,7 @@ const counterSlice = createSlice({
       })
       .addCase(fetchUserById.rejected, (state) => {
         state.stageLoad = "failed";
+
       })
 
       // Thêm sản phẩm vào giỏ hàng

@@ -12,27 +12,34 @@ const Header = () => {
   const totalItems = useSelector((state) => state.data?.cart?.details?.length || 0);
   const stageProfile = useSelector((state) => state.data?.stageProfile);
 
-  localStorage.setItem('id', stageProfile?._id)
-  const [token, setToken] = useState('');
-  useEffect(() => {
-    setToken(localStorage.getItem('token'));
-    const fetchUser = async () => {
-      const isLogin = localStorage.getItem('token');
-      try {
-        if (isLogin) {
-          const decoded = jwtDecode(isLogin);
-          await dispatch(fetchUserById(decoded.email));
-          const id = decoded.id
-          dispatch(fetchCart(id))
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [userId, setUserId] = useState(null);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const storedToken = localStorage.getItem('token');
+      if (storedToken) {
+        try {
+          const decoded = jwtDecode(storedToken);
+          setUserId(decoded.email); 
+          await dispatch(fetchUserById(decoded.email));
+        } catch (error) {
+          console.error("Token không hợp lệ:", error);
+          localStorage.removeItem('token'); // Xóa token không hợp lệ
+          setToken(null);
         }
-      } catch (error) {
-        console.error("Error fetching user:", error);
       }
     };
+
     fetchUser();
-    const id = localStorage.getItem('id');
-  }, [dispatch])
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (stageProfile?._id) {
+      localStorage.setItem("id", stageProfile._id);
+      dispatch(fetchCart(stageProfile._id));
+    }
+  }, [dispatch, stageProfile?._id]);
   return (
     <>
 

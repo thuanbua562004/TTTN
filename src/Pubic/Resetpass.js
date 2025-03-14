@@ -21,7 +21,7 @@ const ResetPassword = () => {
     }
     setLoading(true); // Set loading state
     try {
-      const response = await axios.post("http://localhost:5000/code/reset-password", {
+      const response = await axios.post("http://localhost:3001/reset/reset-password", {
         token: token,
         newPass: password
       });

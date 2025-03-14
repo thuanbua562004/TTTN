@@ -10,12 +10,12 @@ function Product() {
   const [category, setCategory] = useState('');
   const [listcate, setlistcate] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState(null);
-  const [imgShow ,setImgShow] = useState('')
+  const [imgShow, setImgShow] = useState('')
   function handleChange(e) {
     console.log(e.target.files);
     setSelectedFiles(e.target.files);
     setImgShow(URL.createObjectURL(e.target.files[0]));
-}
+  }
 
   const ListProduct = async () => {
     try {
@@ -52,7 +52,7 @@ function Product() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       const img = upload.data.files[0].url
-      const response = await axios.post('/category/category', {name: category ,img});
+      const response = await axios.post('/category/category', { name: category, img });
       console.log(response);
       if (response.status === 200) {
         window.location.reload();
@@ -64,8 +64,8 @@ function Product() {
   }
 
 
-  
-  
+
+
 
   const deleteCategory = async (id) => {
     try {
@@ -79,14 +79,14 @@ function Product() {
   const deleteProduct = async (id) => {
     try {
       const results = await axios.delete(`/phone/phone/${id}`)
-      if(results.status === 200){
+      if (results.status === 200) {
         window.location.reload();
         toast.success('Deleted successfully');
       }
     } catch (error) {
       toast.error('Error deleting product');
     }
-    
+
   };
 
   return (
@@ -98,7 +98,7 @@ function Product() {
           {/* Bảng sản phẩm */}
           <div className="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
             <div className="tm-bg-primary-dark tm-block tm-block-products">
-            <h2 className="tm-block-title">Danh Sách Sản Phẩm</h2>
+              <h2 className="tm-block-title">Danh Sách Sản Phẩm</h2>
               <div className="tm-product-table-container">
                 <table className="table table-hover tm-table-small tm-product-table">
                   <thead>
@@ -114,71 +114,54 @@ function Product() {
                     </tr>
                   </thead>
                   <tbody>
-                    {products.map((product) =>
-                      product.image.map((variant, index) => (
-                        <tr className="bg-white" key={`${product._id}-${index}`}>
-                          {/* Hình ảnh sản phẩm */}
-                          <th scope="row">
-                            <img
-                              style={{ width: "50px", borderRadius: "50%" }}
-                              src={variant.imageUrl}
-                              alt={product.name}
-                            />
-                          </th>
-  
-                          {/* Tên sản phẩm */}
-                          <td>
-                            <a href={`/admin/update/${product._id}`} className="tm-product-name">
-                              {product.name}
-                            </a>
-                          </td>
-  
-                          {/* Màu sắc */}
-                          <td>{variant.color}</td>
-  
-                          {/* ROM/RAM */}
-                          <td>
-                            {variant.memory && variant.memory.length > 0 ? (
-                              variant.memory.map((mem, i) => (
-                                <div key={i}>{mem.infoMemory}</div>
-                              ))
-                            ) : (
-                              <div>No memory available</div>
-                            )}
-                          </td>
-  
-                          {/* Giá */}
-                          <td>
-                            {variant.memory && variant.memory.length > 0 ? (
-                              variant.memory.map((mem, i) => (
-                                <div key={i}>{mem.price.toLocaleString()}₫</div>
-                              ))
-                            ) : (
-                              <div>No price available</div>
-                            )}
-                          </td>
-  
-                          {/* Số lượng */}
-                          <td>
-                            {variant.memory && variant.memory.length > 0 ? (
-                              variant.memory.map((mem, i) => (
-                                <div key={i}>{mem.quantity}</div>
-                              ))
-                            ) : (
-                              <div>No quantity available</div>
-                            )}
-                          </td>
-  
-                          {/* Xóa sản phẩm */}
-                          <td>
-                            <a onClick={() => deleteProduct(product._id)} className="tm-product-delete-link">
-                              <FontAwesomeIcon icon={faTrash} className="far fa-trash-alt tm-product-delete-icon" />
-                            </a>
-                          </td>
-                        </tr>
-                      ))
-                    )}
+                    {products.map((product, index) => (
+                      <tr className="bg-white" key={`${product._id}-${index}`}>
+                        {/* Hình ảnh sản phẩm */}
+                        <th scope="row">
+                          <img
+                            style={{ width: "50px", borderRadius: "50%" }}
+                            src={product.image.length > 0 ? product.image[0].imageUrl : ""}
+                            alt={product.name}
+                          />
+                        </th>
+
+                        {/* Tên sản phẩm */}
+                        <td>
+                          <a href={`/admin/update/${product._id}`} className="tm-product-name">
+                            {product.name}
+                          </a>
+                        </td>
+
+                        {/* Màu sắc & Bộ nhớ */}
+                        <td colSpan="3">
+                          {product.image.map((variant, i) => (
+                            <div key={i} style={{ marginBottom: "10px", borderBottom: "1px solid #ddd", paddingBottom: "5px" }}>
+                              <strong >{variant.color}</strong>
+                              {variant.memory && variant.memory.length > 0 ? (
+                                <ul style={{ paddingLeft: "15px", marginTop: "5px" }}>
+                                  {variant.memory.map((mem, j) => (
+                                    <li key={`${i}-${j}`}>
+                                      {mem.infoMemory} - <strong>{mem.price.toLocaleString()}₫</strong> ({mem.quantity} cái)
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <div>No memory available</div>
+                              )}
+                            </div>
+                          ))}
+                        </td>
+
+                        {/* Xóa sản phẩm */}
+                        <td>
+                          <a onClick={() => deleteProduct(product._id)} className="tm-product-delete-link">
+                            <FontAwesomeIcon icon={faTrash} className="far fa-trash-alt tm-product-delete-icon" />
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
+
                 </table>
               </div>
               <Link to="/admin/addproduct" className="btn btn-primary btn-block text-uppercase mb-3">
@@ -186,7 +169,7 @@ function Product() {
               </Link>
             </div>
           </div>
-  
+
           {/* Bảng danh mục */}
           <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
             <div className="tm-bg-primary-dark tm-block tm-block-product-categories">
@@ -216,7 +199,7 @@ function Product() {
           </div>
         </div>
       </div>
-  
+
       {/* Footer */}
       <footer className="tm-footer row tm-mt-small">
         <div className="col-12 font-weight-light">
@@ -228,7 +211,7 @@ function Product() {
           </p>
         </div>
       </footer>
-  
+
       {/* Modal thêm danh mục */}
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog">
@@ -266,8 +249,8 @@ function Product() {
       </div>
     </>
   );
-  
-  
+
+
 }
 
 export default Product;

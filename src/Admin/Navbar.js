@@ -1,11 +1,11 @@
 import { Link, NavLink } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faPager, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
 function Navbar() {
-  const keyAdmin = localStorage.getItem('token');
+  const keyAdmin = localStorage.getItem('tokenadmin');
   const logOut=()=>{
-    localStorage.removeItem('token');
+    localStorage.removeItem('tokenadmin');
     window.location.href="/admin/login";
   }
   return (
@@ -47,6 +47,16 @@ function Navbar() {
               <li className="nav-item">
                 <NavLink to="/admin/order" className="nav-link text-white">
                   <FontAwesomeIcon icon={faUser} /> Order
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/admin/new" className="nav-link text-white">
+                  <FontAwesomeIcon icon={faPager} /> News
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/admin/rep" className="nav-link text-white">
+                  <FontAwesomeIcon icon={faPager} /> Repli
                 </NavLink>
               </li>
             </ul>

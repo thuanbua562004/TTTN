@@ -3,6 +3,10 @@ import { Outlet, Navigate } from 'react-router-dom';
 import Navbar from '../Admin/Navbar';
 import './templatemo-style.css'
 const PrivateRoute = ({ isAdmin }) => {     
+    if(isAdmin=="undefined") {
+        localStorage.removeItem('tokenadmin')
+        window.location.reload()
+    }
     return isAdmin ? 
     
     <>

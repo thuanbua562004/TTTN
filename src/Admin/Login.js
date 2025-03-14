@@ -9,7 +9,7 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("tokenadmin");
     if (token) {
       window.location.href="/admin/home"
     }
@@ -25,14 +25,16 @@ function Login() {
       });
 
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.older_token);
+        console.log(response.data)
+        localStorage.setItem("tokenadmin", response.data.token);
         toast.success("User logged in successfully");
         window.location.href="/admin/home"
       } else {
         toast.error("User not found");
       }
     } catch (error) {
-      console.error("Login Failed:", error.response?.data || error.message);
+      toast.error("User not found");
+
     }
   };
 

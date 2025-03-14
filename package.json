@@ -12,6 +12,7 @@
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "cra-template": "1.2.0",
+    "fuse.js": "^7.1.0",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
@@ -21,7 +22,11 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.27.0",
     "react-scripts": "5.0.1",
-    "react-toastify": "^11.0.3"
+    "react-simple-chatbot": "^0.6.1",
+    "react-toastify": "^11.0.3",
+    "recharts": "^2.15.1",
+    "remove-accents": "^0.5.0",
+    "swiper": "^11.2.5"
   },
   "scripts": {
     "start": "set PORT=3001 && react-scripts start",
