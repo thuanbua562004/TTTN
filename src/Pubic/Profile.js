@@ -131,9 +131,9 @@ function Profile() {
                                 </li>
                                 <li className="list-group-item">
                                     <i className="bi bi-envelope-at me-2 text-primary"></i>
-                                    <a href={`mailto:${stageProfile?.email || 'example@mail.com'}`} className="text-decoration-none">
+                                    <Link to={`mailto:${stageProfile?.email || 'example@mail.com'}`} className="text-decoration-none">
                                       Gmail:   {stageProfile?.email || "Email"}
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="list-group-item">
                                     <i className="bi bi-telephone me-2 text-info"></i>
@@ -142,9 +142,9 @@ function Profile() {
                             </ul>
 
                             {/* Order History Button */}
-                            <a href="/history" className="btn btn-danger mt-3 w-100">
+                            <Link to={"/history"} className="btn btn-danger mt-3 w-100">
                                 <i className="bi bi-cart3 me-2"></i> Xem Đơn Hàng
-                            </a>
+                            </Link>
 
                             {/* Logout Button */}
                             <button onClick={handleLogout} className="btn btn-warning mt-2 w-100">

@@ -159,9 +159,9 @@ function Pay() {
               </div>
               <div className="row mt-3">
                 <div className="col">
-                  <a href="/cart" className="text-decoration-none">
+                  <Link to={"/cart"} className="text-decoration-none">
                     <i className="fa-solid fa-less-than"></i> Quay Về Giỏ
-                  </a>
+                  </Link>
                 </div>
                 <div className="col text-end">
                   <button type="button" disabled={address == "" || method == ""} onClick={() => handlerPay()} className="btn btn-danger">Thanh Toán</button>

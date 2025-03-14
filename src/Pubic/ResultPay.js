@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "../AxiosConfig/config";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCart, fetchUserById } from "../Redux/counterSlice";
@@ -159,8 +159,8 @@ function OrderSuccess() {
         </div>
       </div>
       <div className="d-flex gap-3 mt-4">
-        <a href="/" className="btn btn-primary btn-lg px-4">Quay lại trang chủ</a>
-        <a href="/history" className="btn btn-outline-secondary btn-lg px-4">Xem chi tiết đơn hàng</a>
+        <Link to={"/"} className="btn btn-primary btn-lg px-4">Quay lại trang chủ</Link>
+        <Link to={"/history"} className="btn btn-outline-secondary btn-lg px-4">Xem chi tiết đơn hàng</Link>
       </div>
     </div>
   );

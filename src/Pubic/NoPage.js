@@ -17,9 +17,9 @@ const NoPage = () => {
             <br />
             các chương trình khuyến mãi khác của CellphoneS nhé.
           </p>
-          <a href="#" className="btn btn-danger btn-lg mb-3">
+          <Link to={"#"} className="btn btn-danger btn-lg mb-3">
             Tham khảo sản phẩm
-          </a>
+          </Link>
           <p className="text-danger fs-5">Gọi 1800.2097 miễn phí</p>
         </div>
       </div>

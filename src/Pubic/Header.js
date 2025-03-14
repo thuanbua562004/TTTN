@@ -82,7 +82,7 @@ const Header = () => {
               {/* Icon hỗ trợ bán hàng */}
               <div className=" d-flex flex-wrap align-items-center justify-content-around mb-2 mb-lg-0">
                 <div className="d-flex flex-wrap align-items-center justify-content-around mb-2 mb-lg-0 px-3">
-                  <a href='tel:"032555"'>
+                  <Link to={'tel:"032555"'}>
                     <div
                       className="d-flex justify-content-center align-items-center bg-white me-2"
                       style={{
@@ -94,7 +94,7 @@ const Header = () => {
                     >
                       <FontAwesomeIcon style={{ color: "red" }} icon={faPhone} />
                     </div>
-                  </a>
+                  </Link>
                   <div className="text-center">
                     <span style={{ fontSize: 12 }}>Bán hàng</span>
                     <br />
@@ -144,9 +144,9 @@ const Header = () => {
                   </div>
                 </div>
 
-                {token ? (<a href="/profile"
+                {token ? (<Link to={"/profile"}
                   className="d-flex d-lg-none  flex-wrap align-items-center justify-content-around mb-2 mb-lg-0 px-5"
-                  to={"#"}
+                
                 >
                   <div
                     className="d-flex justify-content-center align-items-center bg-white me-2"
@@ -163,7 +163,7 @@ const Header = () => {
                   <div className="text-center">
                     <span style={{ textDecoration: "none" }} className='text-danger'>{stageProfile?.email}</span>
                   </div>
-                </a>) : (<div
+                </Link>) : (<div
                   className="d-flex d-lg-none  flex-wrap align-items-center justify-content-around mb-2 mb-lg-0 px-5"
                   data-bs-toggle="modal"
                   data-bs-target="#authModal"

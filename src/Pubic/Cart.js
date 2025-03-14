@@ -109,9 +109,9 @@ function Cart() {
               currency: "VND",
             })}
           </h5>
-          <a href={'/pay'}>
+          <Link to={'/pay'}>
             <button className="btn btn-danger w-100 mt-2">Thanh Toán</button>
-          </a>
+          </Link>
         </div>
 
         {/* Modal Xóa Sản Phẩm */}

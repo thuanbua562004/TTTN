@@ -139,46 +139,46 @@ const Home = () => {
        {/* Xiaomi */}
        <div className="col-6 col-md-3 mt-1">
          <div className="card p-3 shadow-sm">
-          <a href='/all/Xiaomi'>
+          <Link to={'/all/Xiaomi'}>
           <img
              src="https://dienthoaihay.vn/images/products/cat/resized/hang4_1629782113.png"
              alt="Xiaomi"
              className="img-fluid w-100"
            />
-          </a>
+          </Link>
          </div>
        </div>
        <div className="col-6 col-md-3 mt-1">
          <div className="card p-3 shadow-sm">
-         <a href='/all/Realme'>
+         <Link to={'/all/Realme'}>
            <img
              src="https://dienthoaihay.vn/images/products/cat/resized/hang3_1629782127.png"
              alt="Xiaomi"
              className="img-fluid w-100"
            />
-                </a>
+                </Link>
          </div>
        </div>
        <div className="col-6 col-md-3 mt-1">
          <div className="card p-3 shadow-sm">
-         <a href='/all/SamSung'>
+         <Link to={'/all/SamSung'}>
            <img
              src="https://dienthoaihay.vn/images/products/cat/resized/hang2_1629782097.png"
              alt="Xiaomi"
              className="img-fluid w-100"
            />
-                </a>
+                </Link>
          </div>
        </div>
        <div className="col-6 col-md-3 mt-1">
          <div className="card p-3 shadow-sm">
-         <a href='/all/Apple'>
+         <Link to={'/all/Apple'}>
            <img
              src="https://dienthoaihay.vn/images/products/cat/resized/hang1_1629782045.png"
              alt="Xiaomi"
              className="img-fluid w-100"
            />
-                </a>
+                </Link>
          </div>
        </div>
      </div>

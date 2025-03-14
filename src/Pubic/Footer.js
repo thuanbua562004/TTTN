@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Footer = ()=>{
     return(
         <>
@@ -9,24 +11,24 @@ const Footer = ()=>{
         <h5>VỀ CHÚNG TÔI</h5>
         <ul className="list-unstyled">
           <li>
-            <a href="#" className="text-white text-decoration-none">
+            <Link to={"#"} className="text-white text-decoration-none">
               Tin tức
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-white text-decoration-none">
+            <Link to={"#"} className="text-white text-decoration-none">
               Giới thiệu
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-white text-decoration-none">
+            <Link to={"#"} className="text-white text-decoration-none">
               Tuyển dụng
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-white text-decoration-none">
+            <Link to={"#"} className="text-white text-decoration-none">
               Hệ thống đại lý
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -35,19 +37,19 @@ const Footer = ()=>{
         <h5>HỖ TRỢ KHÁCH HÀNG</h5>
         <ul className="list-unstyled">
           <li>
-            <a href="#" className="text-white text-decoration-none">
+            <Link to={"#"} className="text-white text-decoration-none">
               Phương thức thanh toán
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-white text-decoration-none">
+            <Link to={"#"} className="text-white text-decoration-none">
               Chính sách bảo hành - đổi trả
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="text-white text-decoration-none">
+            <Link to={"#"} className="text-white text-decoration-none">
               Giải đáp mua hàng Online
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

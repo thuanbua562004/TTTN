@@ -29,9 +29,9 @@ const NewsPage = () => {
                    <img src={item.img1} alt="News" class="w-100 rounded object-fit-cover" />
                </div>
                <div class="col-9 ps-3">
-                   <a href={`/news/${item._id}`} class="text-decoration-none text-dark fw-semibold">
+                   <Link to={`/news/${item._id}`} class="text-decoration-none text-dark fw-semibold">
                        {item.title}
-                   </a>
+                   </Link>
                </div>
            </li>
        </ul>
