@@ -1,13 +1,12 @@
 import { Link  ,useNavigate} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faPager, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
-import axios from "axios";
 function Navbar() {
   const navigate = useNavigate()
   const keyAdmin = localStorage.getItem('tokenadmin');
   const logOut=()=>{
     localStorage.removeItem('tokenadmin');
-    navigate('/admin/login')
+    navigate('https://tttn-pn1v.onrender.com/admin/login')
   }
   return (
     <>

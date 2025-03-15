@@ -11,7 +11,7 @@ function Login() {
   useEffect(() => {
     const token = localStorage.getItem("tokenadmin");
     if (token) {
-      navigate('/admin/home')
+      navigate('https://tttn-pn1v.onrender.com/admin/home')
     }
 
   }, []);
@@ -29,7 +29,7 @@ function Login() {
       if (response.status === 200) {
         localStorage.setItem("tokenadmin", response.data.token);
         toast.success("User logged in successfully");
-        navigate('https://tttn-pn1v.onrender.com/admin/login')
+        navigate('https://tttn-pn1v.onrender.com/admin/home')
       } else {
         toast.error("User not found");
       }
