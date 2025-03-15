@@ -19,7 +19,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://tttnserver.onrender.com/login", {
+      const response = await axios.post("https://tttn-pn1v.onrender.com/user/login", {
         email,
         password,
       });
