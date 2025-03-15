@@ -18,9 +18,9 @@ function Navbar() {
 
       <nav className="navbar navbar-expand-xl"  >
         <div className="container h-100">
-          <a className="navbar-brand" href="/admin/home">
+          <Link className="navbar-brand" to={"/admin/home"}>
             <h1 className="tm-site-title mb-0 ">Admin</h1>
-          </a>
+          </Link>
           <button
             className="navbar-toggler ml-auto mr-0"
             type="button"
@@ -35,27 +35,27 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto h-100">
               <li className="nav-item">
-                <NavLink to="/admin/home" className="nav-link text-white">
+                <NavLink to={"/admin/home"} className="nav-link text-white">
                   <FontAwesomeIcon icon={faHome} /> Home
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/admin/product" className="nav-link text-white">
+                <NavLink to={"/admin/product"} className="nav-link text-white">
                   <FontAwesomeIcon icon={faShoppingCart} /> Products
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/admin/order" className="nav-link text-white">
+                <NavLink to={"/admin/order"} className="nav-link text-white">
                   <FontAwesomeIcon icon={faUser} /> Order
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/admin/new" className="nav-link text-white">
+                <NavLink to={"/admin/new"} className="nav-link text-white">
                   <FontAwesomeIcon icon={faPager} /> News
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/admin/rep" className="nav-link text-white">
+                <NavLink to={"/admin/rep"} className="nav-link text-white">
                   <FontAwesomeIcon icon={faPager} /> Repli
                 </NavLink>
               </li>
@@ -65,7 +65,7 @@ function Navbar() {
       <li className="nav-item dropdown">
         {keyAdmin ? (
           <Link
-            to="#"
+            to={"#"}
             className="nav-link dropdown-toggle text-white"
             id="userDropdown"
             role="button"
@@ -76,7 +76,7 @@ function Navbar() {
           </Link>
         ) : (
           <NavLink
-            to="/admin/login"
+            to={"/admin/login"}
             className="nav-link d-block text-white"
           >
             LOGIN
@@ -90,7 +90,7 @@ function Navbar() {
             <li>
               <Link
                 className="dropdown-item"
-                to="#"
+                to={"#"}
                 onClick={logOut}
               >
                 Đăng Xuất

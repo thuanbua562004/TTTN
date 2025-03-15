@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Lin , useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from '../AxiosConfig/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
