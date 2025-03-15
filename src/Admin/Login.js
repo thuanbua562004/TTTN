@@ -29,7 +29,7 @@ function Login() {
       if (response.status === 200) {
         localStorage.setItem("tokenadmin", response.data.token);
         toast.success("User logged in successfully");
-        // navigate('/admin/home')
+        navigate('/admin/home')
       } else {
         toast.error("User not found");
       }
