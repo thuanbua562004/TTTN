@@ -6,7 +6,7 @@ function Navbar() {
   const keyAdmin = localStorage.getItem('tokenadmin');
   const logOut=()=>{
     localStorage.removeItem('tokenadmin');
-    navigate('https://tttn-pn1v.onrender.com/admin/login')
+    window.location.href = 'https://tttn-pn1v.onrender.com/admin/login'
   }
   return (
     <>
