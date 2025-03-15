@@ -1,12 +1,13 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link  ,useNavigate} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faPager, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
 function Navbar() {
+  const navigate = useNavigate()
   const keyAdmin = localStorage.getItem('tokenadmin');
   const logOut=()=>{
     localStorage.removeItem('tokenadmin');
-    window.location.href="/admin/login";
+    navigate('https://tttn-pn1v.onrender.com/admin/home')
   }
   return (
     <>
@@ -35,29 +36,29 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto h-100">
               <li className="nav-item">
-                <NavLink to={"/admin/home"} className="nav-link text-white">
+                <Link to={"/admin/home"} className="nav-link text-white">
                   <FontAwesomeIcon icon={faHome} /> Home
-                </NavLink>
+                </Link>
               </li>
               <li className="nav-item">
-                <NavLink to={"/admin/product"} className="nav-link text-white">
+                <Link to={"/admin/product"} className="nav-link text-white">
                   <FontAwesomeIcon icon={faShoppingCart} /> Products
-                </NavLink>
+                </Link>
               </li>
               <li className="nav-item">
-                <NavLink to={"/admin/order"} className="nav-link text-white">
+                <Link to={"/admin/order"} className="nav-link text-white">
                   <FontAwesomeIcon icon={faUser} /> Order
-                </NavLink>
+                </Link>
               </li>
               <li className="nav-item">
-                <NavLink to={"/admin/new"} className="nav-link text-white">
+                <Link to={"/admin/new"} className="nav-link text-white">
                   <FontAwesomeIcon icon={faPager} /> News
-                </NavLink>
+                </Link>
               </li>
               <li className="nav-item">
-                <NavLink to={"/admin/rep"} className="nav-link text-white">
+                <Link to={"/admin/rep"} className="nav-link text-white">
                   <FontAwesomeIcon icon={faPager} /> Repli
-                </NavLink>
+                </Link>
               </li>
             </ul>
 
@@ -75,12 +76,12 @@ function Navbar() {
             <FontAwesomeIcon icon={faUser} /> {}
           </Link>
         ) : (
-          <NavLink
+          <Link
             to={"/admin/login"}
             className="nav-link d-block text-white"
           >
             LOGIN
-          </NavLink>
+          </Link>
         )}
         {keyAdmin && (
           <ul
@@ -89,7 +90,8 @@ function Navbar() {
           >
             <li>
               <Link
-                className="dropdown-item"
+
+                className="dropdown-item text-danger"
                 to={"#"}
                 onClick={logOut}
               >
