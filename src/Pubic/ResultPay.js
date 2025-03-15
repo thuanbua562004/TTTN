@@ -109,7 +109,7 @@ function OrderSuccess() {
   const sendMailCash = async () => {
     try {
       const result = await axios.post("reset/cash-success", {
-        email: data.stageProfile.email,
+        email: data.stageProfile?.email,
         id,
         toTal
       })

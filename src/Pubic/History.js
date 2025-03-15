@@ -71,7 +71,9 @@ function HistoryBuy() {
                 <div className="col-md-6">
                   <p><strong>Ngày đặt:</strong> {new Date(order?.date).toLocaleDateString()}</p>
                   <p><strong>Số điện thoại:</strong> {order?.phone || "N/A"}</p>
-                  <p><strong>Địa chỉ nhận:</strong> {order?.address || "N/A"}</p>
+                  <p><strong>Địa chỉ nhận:</strong> {order?.adress || "N/A"}</p>
+                  <p><strong>Ghi chú:</strong> {order?.note || "N/A"}</p>
+
                 </div>
                 <div className="col-md-6 text-right">
                   <h4 className="text-danger">
