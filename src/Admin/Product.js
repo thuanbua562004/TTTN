@@ -1,4 +1,4 @@
-import { Lin , useNavigate } from 'react-router-dom';
+import {  Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from '../AxiosConfig/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -127,9 +127,9 @@ function Product() {
 
                         {/* Tên sản phẩm */}
                         <td>
-                          <a href={`/admin/update/${product._id}`} className="tm-product-name">
+                          <Link to={`/admin/update/${product._id}`} className="tm-product-name">
                             {product.name}
-                          </a>
+                          </Link>
                         </td>
 
                         {/* Màu sắc & Bộ nhớ */}
@@ -164,7 +164,7 @@ function Product() {
 
                 </table>
               </div>
-              <Link to="/admin/addproduct" className="btn btn-primary btn-block text-uppercase mb-3">
+              <Link to={"/admin/addproduct"} className="btn btn-primary btn-block text-uppercase mb-3">
                 Add new product
               </Link>
             </div>
