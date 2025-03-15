@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "../AxiosConfig/config";
 import { ToastContainer, toast } from 'react-toastify';
 import UploadImg from "./UploadImg"
+import { useNavigate } from "react-router-dom";
 function AddProduct() {
+  const navigate = useNavigate()
   const [listImg, setListImg] = useState(null)
   const [name, setName] = useState("");
   const [info, setInfo] = useState("");
@@ -168,7 +170,7 @@ function AddProduct() {
       const result = await axios.post("/phone/phone", { data });
       if (result.status === 200) {
         toast.success("Thêm sản phẩm thành công");
-        window.location.href('https://tttnserver.onrender.com/admin/product');
+        navigate('https://tttnserver.onrender.com/admin/product')
       } else {
         toast.success("Loi");
       }

@@ -28,7 +28,7 @@ function Login() {
         console.log(response.data)
         localStorage.setItem("tokenadmin", response.data.token);
         toast.success("User logged in successfully");
-        window.location.href="/admin/home"
+        navigate('/admin/home')
       } else {
         toast.error("User not found");
       }

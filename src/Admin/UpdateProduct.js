@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "../AxiosConfig/config";
 import { ToastContainer, toast } from 'react-toastify';
 import { useParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 function AddProduct() {
+  const navigate = useNavigate()
   const [cate, setlistcate] = useState([])
   const [name, setName] = useState("");
   const [info, setInfo] = useState("");
@@ -205,7 +206,8 @@ function AddProduct() {
       const result = await axios.put("/phone/phone", { data });
       if (result.status === 200) {
         toast.success("Cập nhật sản phẩm thành công");
-        window.location.href = "https://tttnserver.onrender.com/admin/product"
+        navigate('https://tttnserver.onrender.com/admin/product')
+
       } else {
         toast.success("Loi");
       }
