@@ -170,7 +170,7 @@ function AddProduct() {
       const result = await axios.post("/phone/phone", { data });
       if (result.status === 200) {
         toast.success("Thêm sản phẩm thành công");
-        navigate('/admin/product')
+        window.location.href ='https://tttn-pn1v.onrender.com/admin/product'
       } else {
         toast.success("Loi");
       }
