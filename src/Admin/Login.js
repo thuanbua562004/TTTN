@@ -19,7 +19,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3000/user/login", {
+      const response = await axios.post("https://tttnserver.onrender.com/login", {
         email,
         password,
       });

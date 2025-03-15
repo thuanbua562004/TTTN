@@ -168,7 +168,7 @@ function AddProduct() {
       const result = await axios.post("/phone/phone", { data });
       if (result.status === 200) {
         toast.success("Thêm sản phẩm thành công");
-        window.location.href('http://localhost:3001/admin/product');
+        window.location.href('https://tttnserver.onrender.com/admin/product');
       } else {
         toast.success("Loi");
       }

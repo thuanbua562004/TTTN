@@ -205,7 +205,7 @@ function AddProduct() {
       const result = await axios.put("/phone/phone", { data });
       if (result.status === 200) {
         toast.success("Cập nhật sản phẩm thành công");
-        window.location.href = "http://localhost:3001/admin/product"
+        window.location.href = "https://tttnserver.onrender.com/admin/product"
       } else {
         toast.success("Loi");
       }
