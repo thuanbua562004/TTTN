@@ -11,7 +11,7 @@ function Login() {
   useEffect(() => {
     const token = localStorage.getItem("tokenadmin");
     if (token) {
-      window.location.href="/admin/home"
+      navigate('/home/admin')
     }
   }, []);
 

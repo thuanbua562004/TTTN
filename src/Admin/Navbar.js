@@ -19,7 +19,7 @@ function Navbar() {
 
       <nav className="navbar navbar-expand-xl"  >
         <div className="container h-100">
-          <Link className="navbar-brand" to={"/admin/home"}>
+          <Link className="navbar-brand" to={'/admin/home'}>
             <h1 className="tm-site-title mb-0 ">Admin</h1>
           </Link>
           <button
