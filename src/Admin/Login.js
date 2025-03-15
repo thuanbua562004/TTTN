@@ -13,22 +13,23 @@ function Login() {
     if (token) {
       navigate('/admin/home')
     }
+
   }, []);
 
   const handlerLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://tttn-pn1v.onrender.com/user/login", {
+      const response = await axios.post("https://tttnserver.onrender.com/user/login", {
         email,
         password,
       });
 
+      console.log(response.data)
       if (response.status === 200) {
-        console.log(response.data)
         localStorage.setItem("tokenadmin", response.data.token);
         toast.success("User logged in successfully");
-        navigate('/admin/home')
+        // navigate('/admin/home')
       } else {
         toast.error("User not found");
       }
