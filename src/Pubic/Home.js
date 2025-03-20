@@ -61,7 +61,7 @@ const Home = () => {
          <div className="carousel-inner">
            <div className="carousel-item active">
              <img
-               src="https://dienthoaihay.vn/images/slideshow/2025/02/28/compress/iqoo-neo-10_1740706059.jpg"
+               src="https://dienthoaihay.vn/images/slideshow/2025/02/28/compress/ace-3v_1740706116.jpg"
                className="d-block w-100"
                alt="..."
              />
