@@ -3,6 +3,10 @@ import Product from './Product';
 import axios  from '../AxiosConfig/config';
 import NewRow from "./NewRow"
 import { Link } from 'react-router-dom';
+import img1 from '../img/1.jpg'
+import img2 from '../img/2.jpg'
+import img3 from '../img/3.jpg'
+
 const Home = () => {
   const [category, setCategory] = useState(null)
   const fetchCate = async () => {
@@ -61,7 +65,8 @@ const Home = () => {
          <div className="carousel-inner">
            <div className="carousel-item active">
              <img
-               src="https://dienthoaihay.vn/images/slideshow/2025/02/28/compress/ace-3v_1740706116.jpg"
+
+               src={img1}
                className="d-block w-100"
                alt="..."
              />
@@ -71,7 +76,7 @@ const Home = () => {
            </div>
            <div className="carousel-item">
              <img
-               src="https://dienthoaihay.vn/images/slideshow/2025/01/15/compress/realme-q5-pro_1736922718.jpg"
+               src={img2}
                className="d-block w-100"
                alt="..."
              />
@@ -81,7 +86,7 @@ const Home = () => {
            </div>
            <div className="carousel-item">
              <img
-               src="https://dienthoaihay.vn/images/slideshow/2024/09/26/compress/redmi-k40_1727311459.jpg"
+               src={img3}
                className="d-block w-100"
                alt="..."
              />

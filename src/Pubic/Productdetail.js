@@ -30,7 +30,8 @@ const Productdetail = () => {
     try {
       const id_color_memory = id_product + color + memory
       if (memory == null || color == null) {
-        alert('Vui lòng chọn màu và RAM')
+        toast.error('Vui lòng chọn màu và RAM');
+
         return
       }
       dispatch(addProductToCart({
@@ -47,13 +48,20 @@ const Productdetail = () => {
         .then((res) => {
           if (res.meta.requestStatus === "fulfilled") {
             toast.success("Thêm vào giỏ thành công!")
-          } else {
-            toast.error("Vui lòng đăng nhập!");
+          }
+          if(res.error.message.includes('501')){
+            toast.error("Sản phẩm đã có trong giỏ hàng");
+
+          }
+           else {
+            console.log(res)
+            toast.error("Lỗi! Vui lòng đăng nhập  ");
+
           }
         });
 
     } catch (error) {
-      console.log(error)
+      toast.error("Lỗi! Vui lòng đăng nhập  ");
     }
   }
 

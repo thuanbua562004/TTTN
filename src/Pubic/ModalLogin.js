@@ -141,9 +141,9 @@ const ModalLogin = () => {
                   <button type="submit" className="btn btn-danger btn-lg w-100"
                     style={{ backgroundColor: "#ff0000" }}>
                     Đăng nhập
-                  </button>``
+                  </button>
                   <Link className='mt-5 text-danger' to={'/sendCode'}>Bạn quên mật khẩu?</Link>
-                  <br/>``
+                  <br/>
                   <Link className='mt-5 text-danger' to={'/history'}>Xem lịch sử đơn?</Link>
 
                   <hr className="my-4" /><GoogleLogin

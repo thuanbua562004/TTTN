@@ -92,7 +92,7 @@ function OrderSuccess() {
             console.log("Xóa giỏ hàng thành công");
             localStorage.removeItem("address");
             localStorage.removeItem("note");
-            sendMailCash()
+            await sendMailCash()
           } catch (error) {
             console.error("Lỗi khi xóa giỏ hàng:", error);
           }

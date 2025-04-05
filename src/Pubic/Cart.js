@@ -53,7 +53,7 @@ function Cart() {
                   <h6 className="fw-bold">{item.nameProduct}</h6>
                   <p className="text-muted small">{item.color} - {item.memory}</p>
                   <p className="text-danger fw-bold mb-1">
-                    {item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                    {item?.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                   </p>
                   <div className="d-flex align-items-center justify-content-center">
                     <button
@@ -75,7 +75,7 @@ function Cart() {
               </div>
               <div className="d-flex justify-content-between align-items-center mt-2">
                 <span className="fw-bold text-danger">
-                  Tổng: {(item.price * item.number).toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                  Tổng: {(item?.price * item.number).toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
                 </span>
                 <button className="btn btn-link text-danger p-0" onClick={() => setIdProduct(item._id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
                   <FontAwesomeIcon icon={faTrash} />
@@ -88,7 +88,7 @@ function Cart() {
 
       <div className="d-flex flex-column align-items-center p-3 text-center">
         <h5 className="fw-bold text-danger">
-          Tổng Tiền: {data.cart.details.reduce((total, item) => total + item.price * item.number, 0).toLocaleString('it-IT', {
+          Tổng Tiền: {data.cart.details.reduce((total, item) => total + item?.price * item.number, 0).toLocaleString('it-IT', {
             style: 'currency',
             currency: 'VND',
           })}

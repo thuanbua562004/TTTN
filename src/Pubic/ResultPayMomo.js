@@ -82,7 +82,7 @@ function OrderSuccess() {
           console.log("Xóa giỏ hàng thành công");
           localStorage.removeItem("address");
           localStorage.removeItem("note");
-          sendMailCash();
+          await sendMailCash();
         } else {
           localStorage.removeItem("quickBuy");
         }
@@ -95,7 +95,8 @@ function OrderSuccess() {
   // ✅ Gửi email xác nhận giao dịch thành công
   const sendMailCash = async () => {
     try {
-      await axios.post("/reset/cash-success", {
+
+       await axios.post("/reset/cash-success", {
         email: data.stageProfile?.email,
         id,
         total: amount,
