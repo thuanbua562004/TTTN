@@ -18,10 +18,10 @@ const EmailForm = () => {
       setMessage(response.data.message);
       console.log(response)
       if(response.status==205){
-        setMessage("Gmail chưa đăng kí tài khoản !");
+        setMessage("Gmail được đăng nhập bằng google hoặc chưa đăng kí!");
       }
     } catch (error) {
-      setMessage('Đã xảy ra lỗi, vui lòng thử lại.');
+      setMessage('Gmail được đăng nhập bằng google hoặc chưa đăng kí!');
     } finally {
       setLoading(false);
     }
