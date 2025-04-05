@@ -11,22 +11,23 @@ function Home() {
         const response = await axios.get("/history/history");
         if (response.data && Array.isArray(response.data)) {
           setOrders(response.data);
+          console.log("📦 Orders received:", response.data);
         } else {
-          console.warn("Invalid API response:", response.data);
+          console.warn("⚠️ Invalid API response:", response.data);
         }
       } catch (error) {
-        console.error("Error fetching orders:", error);
+        console.error("❌ Error fetching orders:", error);
       }
     };
 
     getOrders();
   }, []);
 
-  // ✅ Xử lý dữ liệu PieChart (Trạng thái đơn hàng)
+  // ✅ Pie Chart: Trạng thái đơn hàng (stage)
   const orderStatusMap = {};
   orders.forEach((order) => {
-    if (order.status) {
-      orderStatusMap[order.status] = (orderStatusMap[order.status] || 0) + 1;
+    if (order.stage) {
+      orderStatusMap[order.stage] = (orderStatusMap[order.stage] || 0) + 1;
     }
   });
 
@@ -35,12 +36,15 @@ function Home() {
     value,
   }));
 
-  // ✅ Xử lý dữ liệu BarChart (Doanh thu theo ngày)
+  // ✅ Bar Chart: Doanh thu theo ngày (date, totalPrice)
   const revenueMap = {};
   orders.forEach((order) => {
-    if (order.createdAt && order.totalPrice) {
-      const date = new Date(order.createdAt).toISOString().split("T")[0];
-      revenueMap[date] = (revenueMap[date] || 0) + order.totalPrice;
+    if (order.date && !isNaN(new Date(order.date)) && order.totalPrice) {
+      const date = new Date(order.date).toISOString().split("T")[0];
+      const price = parseFloat(order.totalPrice);
+      if (!isNaN(price)) {
+        revenueMap[date] = (revenueMap[date] || 0) + price;
+      }
     }
   });
 
@@ -59,7 +63,7 @@ function Home() {
         type: "pie",
         radius: ["40%", "70%"],
         label: { show: true, formatter: "{b}: {c}" },
-        data: orderStatusData,
+        data: orderStatusData.length > 0 ? orderStatusData : [{ name: "Không có dữ liệu", value: 1 }],
       },
     ],
   };
@@ -96,17 +100,29 @@ function Home() {
       </div>
 
       <div className="row tm-content-row">
-        {/* Biểu đồ PieChart */}
+        {/* Pie Chart */}
         <div className="col-lg-6 tm-block-col">
           <div className="tm-bg-primary-dark tm-block">
-            <ReactECharts option={pieChartOptions} style={{ width: "100%", height: 400 }} />
+            <h4 className="text-white text-center mt-3">Biểu đồ trạng thái đơn hàng</h4>
+            <ReactECharts
+              option={pieChartOptions}
+              notMerge={true}
+              lazyUpdate={true}
+              style={{ width: "100%", height: 400 }}
+            />
           </div>
         </div>
 
-        {/* Biểu đồ BarChart */}
+        {/* Bar Chart */}
         <div className="col-lg-6 tm-block-col">
           <div className="tm-bg-primary-dark tm-block">
-            <ReactECharts option={barChartOptions} style={{ width: "100%", height: 400 }} />
+            <h4 className="text-white text-center mt-3">Biểu đồ doanh thu theo ngày</h4>
+            <ReactECharts
+              option={barChartOptions}
+              notMerge={true}
+              lazyUpdate={true}
+              style={{ width: "100%", height: 400 }}
+            />
           </div>
         </div>
       </div>
