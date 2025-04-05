@@ -25,11 +25,11 @@ const ResetPassword = () => {
         token: token,
         newPass: password
       });
-      console.log(response
-      )
+      console.log(response)
       setMessage('Đổi mật khẩu thành công!');
     } catch (error) {
-      setMessage('Đã có lỗi xảy ra. Vui lòng thử lại!');
+      console.log(error)
+      // setMessage('Đã có lỗi xảy ra. Vui lòng thử lại!');
     } finally {
       setLoading(false); // Reset loading state after the request completes
     }
