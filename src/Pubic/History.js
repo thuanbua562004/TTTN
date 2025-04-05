@@ -63,7 +63,7 @@ function HistoryBuy() {
           <div className="card mb-4 shadow-sm" key={order?.id || index}>
             <div className="card-header bg-danger text-white">
               <h5 className="mb-0">
-                Đơn Hàng #{order.id} - Ngày: {new Date(order?.date).toLocaleDateString()}
+                Đơn Hàng #{order._id} - Ngày: {new Date(order?.date).toLocaleDateString()}
               </h5>
             </div>
             <div className="card-body">
