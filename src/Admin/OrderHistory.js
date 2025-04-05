@@ -22,7 +22,7 @@ const AdminOrderHistory = () => {
       const response1 = await axios.post('/reset/update-order-status',{
         id:selectedOrder._id ,
         status: newStatus,
-        email :"vanthuan562004@gmail.com"
+        email :localStorage.getItem('email')
       });
       getHistory()
     } catch (error) {

@@ -86,6 +86,7 @@ const counterSlice = createSlice({
       })
       .addCase(fetchUserById.fulfilled, (state, action) => {
         state.stageProfile = action.payload;
+        localStorage.setItem('email',action.payload.email)
         state.stageLoad = "success";
       })
       .addCase(fetchUserById.rejected, (state) => {

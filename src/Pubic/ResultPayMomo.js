@@ -95,16 +95,17 @@ function OrderSuccess() {
   // ✅ Gửi email xác nhận giao dịch thành công
   const sendMailCash = async () => {
     try {
-
-       await axios.post("/reset/cash-success", {
-        email: data.stageProfile?.email,
+      const result = await axios.post("/reset/cash-success", {
+        email: data.stageProfile.email,
         id,
         total: amount,
       });
+
     } catch (error) {
       console.log("Lỗi gửi email:", error);
     }
   };
+
 
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center vh-100">

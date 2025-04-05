@@ -56,7 +56,7 @@ function OrderSuccess() {
       console.log("Danh sách sản phẩm:", productList);
   
       if (productList.length > 0) {
-        setStatusPay(true);
+        // setStatusPay(true);
         handlerSaveHistory(productList);
       }
     }
@@ -108,11 +108,13 @@ function OrderSuccess() {
 
   const sendMailCash = async () => {
     try {
+      console.log( data.stageProfile?.email)
       const result = await axios.post("/reset/cash-success", {
-        email: data.stageProfile?.email,
+        email: data.stageProfile.email,
         id,
         total : toTal
       })
+      console.log(result)
     } catch (error) {
       console.log(error)
     }
